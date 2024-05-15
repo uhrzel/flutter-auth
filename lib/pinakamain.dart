@@ -36,6 +36,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         ],
       ),
       body: Container(
+        padding: EdgeInsets.all(16.0),
         height: MediaQuery.of(context).size.height - kToolbarHeight - 80,
         child: SingleChildScrollView(
           child: Column(
@@ -93,42 +94,66 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                         ),
                       ),
                     ),
-              ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        content: Container(
-                          height: 300,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextField(
-                                controller: emailController,
-                                decoration: InputDecoration(labelText: 'Email'),
+              SizedBox(height: 20),
+              Center(
+                child: SizedBox(
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            elevation: 5,
+                            child: Container(
+                              height: 300,
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      'Create User',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  TextField(
+                                    controller: emailController,
+                                    decoration:
+                                        InputDecoration(labelText: 'Email'),
+                                  ),
+                                  TextField(
+                                    controller: passwordController,
+                                    decoration:
+                                        InputDecoration(labelText: 'Password'),
+                                    obscureText: true,
+                                  ),
+                                  SizedBox(height: 20),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        createUser();
+                                      },
+                                      child: Text('Create User'),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              TextField(
-                                controller: passwordController,
-                                decoration:
-                                    InputDecoration(labelText: 'Password'),
-                                obscureText: true,
-                              ),
-                              SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () {
-                                  createUser();
-                                },
-                                child: Text('Create User'),
-                              ),
-                            ],
-                          ),
-                        ),
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-                child: Text('Create User'),
+                    child: Text('Create User', style: TextStyle(fontSize: 16)),
+                  ),
+                ),
               ),
             ],
           ),
@@ -198,7 +223,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         TextEditingController(text: user['email']);
     final TextEditingController editPasswordController =
         TextEditingController(text: user['password']);
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -219,12 +243,18 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   obscureText: true,
                 ),
                 SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    editUser(user['id'], editEmailController.text,
-                        editPasswordController.text);
-                  },
-                  child: Text('Save Changes'),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      editUser(
+                        user['id'],
+                        editEmailController.text,
+                        editPasswordController.text,
+                      );
+                    },
+                    child: Text('Save Changes'),
+                  ),
                 ),
               ],
             ),
