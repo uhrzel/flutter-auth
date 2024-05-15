@@ -7,6 +7,6 @@
     <item>
         <bitmap
             android:gravity="fill"
-            android:src="@mipmap/flash" />
+            android:src="@mipmap/flash1" />
     </item>
 </layer-list>

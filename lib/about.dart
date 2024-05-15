@@ -249,7 +249,7 @@ class _AboutScreenState extends State<AboutScreen> {
   }
 
   Future<void> fetchUsersData() async {
-    final url = 'http://192.168.254.159:8080/auth/get_users.php';
+    final url = 'https://flutter-auth.devbackyard.com/get_users.php';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       setState(() {
@@ -261,7 +261,7 @@ class _AboutScreenState extends State<AboutScreen> {
   }
 
   Future<Map<String, dynamic>> fetchUserData(String email) async {
-    final url = 'http://192.168.254.159:8080/auth/user_data.php';
+    final url = 'https://flutter-auth.devbackyard.com/user_data.php';
     final response = await http.get(Uri.parse('$url?email=$email'));
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);

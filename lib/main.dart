@@ -51,7 +51,7 @@ class LoginScreen extends StatelessWidget {
 
   Future<void> loginUser(
       BuildContext context, String email, String password) async {
-    final url = 'http://192.168.254.159:8080/auth/login.php';
+    final url = 'https://flutter-auth.devbackyard.com/login.php';
     final response = await http.post(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
@@ -179,7 +179,7 @@ class SignupScreen extends StatelessWidget {
 
   Future<void> registerUser(
       BuildContext context, String email, String password) async {
-    final url = 'http://192.168.254.159:8080/auth/register.php';
+    final url = 'https://flutter-auth.devbackyard.com/register.php';
     final response = await http.post(
       Uri.parse(url),
       headers: {'Content-Type': 'application/json'},
@@ -213,104 +213,115 @@ class SignupScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Sign Up'),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 40),
-            Text(
-              'Sign Up',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 40),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
+      body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(32),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/signup.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Sign Up',
+                style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: InputBorder.none,
+              SizedBox(height: 40),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: InputBorder.none,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: InputBorder.none,
+              SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
                 ),
-                obscureText: true,
-              ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: InputBorder.none,
                   ),
-                ],
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: TextField(
-                controller: confirmPasswordController,
-                decoration: InputDecoration(
-                  labelText: 'Confirm Password',
-                  border: InputBorder.none,
+                  obscureText: true,
                 ),
-                obscureText: true,
               ),
-            ),
-            SizedBox(height: 40),
-            SizedBox(
-              width: 500, // Set the width as per your requirement
-              child: ElevatedButton(
-                onPressed: () {
-                  if (passwordController.text ==
-                      confirmPasswordController.text) {
-                    registerUser(
-                        context, emailController.text, passwordController.text);
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Passwords do not match')),
-                    );
-                  }
-                },
-                child: Text('Sign Up'),
+              SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: TextField(
+                  controller: confirmPasswordController,
+                  decoration: InputDecoration(
+                    labelText: 'Confirm Password',
+                    border: InputBorder.none,
+                  ),
+                  obscureText: true,
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-          ],
+              SizedBox(height: 40),
+              SizedBox(
+                width: 500, // Set the width as per your requirement
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (passwordController.text ==
+                        confirmPasswordController.text) {
+                      registerUser(context, emailController.text,
+                          passwordController.text);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Passwords do not match')),
+                      );
+                    }
+                  },
+                  child: Text('Sign Up'),
+                ),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );

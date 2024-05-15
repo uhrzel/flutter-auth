@@ -18,6 +18,7 @@ class MainMenuScreen extends StatefulWidget {
 class _MainMenuScreenState extends State<MainMenuScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
   List<Map<String, dynamic>> usersData = [];
 
   @override
@@ -287,7 +288,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   }
 
   Future<void> createUser() async {
-    final url = 'http://192.168.254.159:8080/auth/create.php';
+    final url = 'https://flutter-auth.devbackyard.com/create.php';
     final Map<String, dynamic> data = {
       'email': emailController.text,
       'password': passwordController.text,
@@ -416,7 +417,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   }
 
   Future<void> deleteUser(int id) async {
-    final url = 'http://192.168.254.159:8080/auth/delete.php';
+    final url = 'https://flutter-auth.devbackyard.com/delete.php';
     final Map<String, dynamic> data = {
       'id': id,
     };
@@ -448,7 +449,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   }
 
   Future<void> editUser(int id, String email, String password) async {
-    final url = 'http://192.168.254.159:8080/auth/edit.php';
+    final url = 'https://flutter-auth.devbackyard.com/edit.php';
     final Map<String, dynamic> data = {
       'id': id,
       'email': email,
@@ -494,7 +495,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   }
 
   Future<void> fetchUsersData() async {
-    final url = 'http://192.168.254.159:8080/auth/get_users.php';
+    final url = 'https://flutter-auth.devbackyard.com/get_users.php';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       setState(() {
@@ -506,7 +507,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   }
 
   Future<Map<String, dynamic>> fetchUserData(String email) async {
-    final url = 'http://192.168.254.159:8080/auth/user_data.php';
+    final url = 'https://flutter-auth.devbackyard.com/user_data.php';
     final response = await http.get(Uri.parse('$url?email=$email'));
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
