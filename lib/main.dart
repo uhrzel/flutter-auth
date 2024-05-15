@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'pinakamain.dart';
+import 'welcome.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,6 +38,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/* void _onItemTapped(int index) {
+  setState(() {
+    _selectedIndex = index;
+    Navigator.pop(context);
+  });
+} */
+
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -59,7 +67,7 @@ class LoginScreen extends StatelessWidget {
         );
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MainMenuScreen(email: email)),
+          MaterialPageRoute(builder: (context) => HomeScreen(email: email)),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
