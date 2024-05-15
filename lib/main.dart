@@ -144,12 +144,15 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                loginUser(
-                    context, emailController.text, passwordController.text);
-              },
-              child: Text('Login'),
+            SizedBox(
+              width: 500, // Set the width as per your requirement
+              child: ElevatedButton(
+                onPressed: () {
+                  loginUser(
+                      context, emailController.text, passwordController.text);
+                },
+                child: Text('Login'),
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -289,18 +292,22 @@ class SignupScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                if (passwordController.text == confirmPasswordController.text) {
-                  registerUser(
-                      context, emailController.text, passwordController.text);
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Passwords do not match')),
-                  );
-                }
-              },
-              child: Text('Sign Up'),
+            SizedBox(
+              width: 500, // Set the width as per your requirement
+              child: ElevatedButton(
+                onPressed: () {
+                  if (passwordController.text ==
+                      confirmPasswordController.text) {
+                    registerUser(
+                        context, emailController.text, passwordController.text);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Passwords do not match')),
+                    );
+                  }
+                },
+                child: Text('Sign Up'),
+              ),
             ),
             SizedBox(height: 20),
           ],
